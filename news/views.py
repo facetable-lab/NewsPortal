@@ -8,7 +8,7 @@ def index(request):
     categories = Category.objects.all()
 
     context = {
-        'title': 'Список новостей',
+        'title': 'Все новости',
         'news': news,
         'categories': categories
     }
