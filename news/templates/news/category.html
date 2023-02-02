@@ -13,7 +13,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Новостной портал</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,10 +22,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Главная</a>
+                <a class="nav-link" href="{% url 'home' %}">Главная</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Добавить новость</a>
+                <a class="nav-link" href="{% url 'home' %}">Добавить новость</a>
             </li>
         </ul>
         {% now "Y-m-d H:i:s" %}
@@ -41,12 +41,12 @@
         {% for item in categories %}
 
         {% if item.id == category.id %}
-        <a href="/category/{{ item.id }}" class="list-group-item list-group-item-action disabled"
+        <a class="list-group-item list-group-item-action disabled"
            style="font-size: 22px; width: 97%; margin: 0 auto; color: #b4b4b4;">
             {{ item.title }}
         </a>
         {% else %}
-        <a href="/category/{{ item.id }}" class="list-group-item list-group-item-action"
+        <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action"
            style="font-size: 22px; width: 97%; margin: 0 auto;">
             {{ item.title }}
         </a>
