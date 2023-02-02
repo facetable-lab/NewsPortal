@@ -4,6 +4,8 @@ from .models import News, Category
 
 
 class NewsAdmin(admin.ModelAdmin):
+    list_editable = ('is_published',)
+    list_filter = ('is_published', 'category')
     list_display = ('pk', 'title', 'category', 'created_at', 'updated_at', 'is_published')
     list_display_links = ('pk', 'title', 'category')
     search_fields = ('title', 'content')
