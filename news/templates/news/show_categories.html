@@ -1,0 +1,17 @@
+<div class="list-group mt-3">
+    {% for item in categories %}
+
+    {% if item.pk == current_category %}
+    <a class="list-group-item list-group-item-action disabled"
+       style="font-size: 22px; width: 97%; margin: 0 auto; color: #b4b4b4;">
+        {{ item.title }}
+    </a>
+    {% else %}
+    <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action"
+       style="font-size: 22px; width: 97%; margin: 0 auto;">
+        {{ item.title }}
+    </a>
+    {% endif %}
+
+    {% endfor %}
+</div>
