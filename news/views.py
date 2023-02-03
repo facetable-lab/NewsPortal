@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import News, Category
 
@@ -25,3 +25,12 @@ def get_category(request, category_id):
 
     return render(request, template_name='news/category.html', context=context)
 
+
+def view_news(request, news_id):
+    news_item = get_object_or_404(klass=News, pk=news_id)
+
+    context = {
+        'news_item': news_item,
+    }
+
+    return render(request, template_name='news/view_news.html', context=context)
