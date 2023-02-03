@@ -1,19 +1,15 @@
 {% extends 'base.html' %}
+{% load news_tags %}
 
-{% block title %}{{ title }} :: Новостной портал{% endblock %}
+{% block title %}
+{{ title }} :: Новостной портал
+{% endblock %}
 
 {% block upbar %}
-<h2>Выбор категории:</h2>
 
-<div class="list-group mt-3">
-    <!--        <li class="list-group-item disabled" aria-disabled="true">A disabled item</li>-->
-    {% for item in categories %}
-    <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action"
-       style="font-size: 22px; width: 97%; margin: 0 auto;">
-        {{ item.title }}
-    </a>
-    {% endfor %}
-</div>
+<h2>Выбор категории:</h2>
+{% show_categories %}
+
 {% endblock %}
 
 {% block content %}
