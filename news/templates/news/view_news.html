@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load news_tags %}
+
+{% block title %}
+{{ news_item }} :: Новостной портал
+{% endblock %}
+
+{% comment %}
+{% block upbar %}
+
+<h2>Выбор категории:</h2>
+{% show_categories %}
+
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+
+<div class="card-body">
+    <div class="card-header">
+        Категория: <a href="{{ news_item.category.get_absolute_url }}">{{ news_item.category }}</a>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-3">
+            <div class="card mb-3 mt-3">
+                {% if news_item.image %}
+                <img src="{{ news_item.image.url }}" class="mr-3" width="100%" height="260" alt="">
+                {% else %}
+                <img src="https://picsum.photos/id/870/260/260?grayscale&blur=2" width="100%" height="260"
+                     class="mr-3" alt="">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-lg-9 mt-2">
+            <h3 class="card-title">{{ news_item.title }}</h3>
+            <p class="card-text" style="font-size: 19px">{{ news_item.content|safe|linebreaksbr }}</p>
+        </div>
+    </div>
+    <div class="card-footer text-muted mt-3">
+        {{ news_item.created_at }} <!-- |date:"Y-m-d H:i:s" -->
+    </div>
+</div>
+
+{% endblock %}
