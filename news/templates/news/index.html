@@ -18,7 +18,7 @@
 {% for item in news %}
 <div class="card-body">
     <div class="card-header">
-        Категория: <a href="{% url 'category' item.category.pk %}">{{ item.category }}</a>
+        Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a>
     </div>
     <div class="row">
 
@@ -31,7 +31,7 @@
                      class="mr-3" alt="">
                 {% endif %}
             </div>
-            <a href="#" class="btn btn-primary" style="width: 100%">Читать далее ...</a>
+            <a href="{{ item.get_absolute_url }}" class="btn btn-primary" style="width: 100%">Читать далее ...</a>
         </div>
 
         <div class="col-lg-9 mt-2" style="max-height: 330px; overflow: hidden">
