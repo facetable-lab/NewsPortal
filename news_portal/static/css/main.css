@@ -1,0 +1,15 @@
+body {
+    background-color: #e5e5e5;
+}
+nav {
+    background-color: #f8f8f8;
+}
+.row {
+    background-color: #ededed;
+    width: 99.9%;
+    margin: 0 auto;
+}
+
+.list-group a{
+    background-color: #f8f8f8;
+}
