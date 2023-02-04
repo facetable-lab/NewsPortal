@@ -19,7 +19,7 @@ class Category(models.Model):
 
 
 class News(models.Model):
-    title = models.CharField(max_length=150, db_index=True, verbose_name='Заголовок')
+    title = models.CharField(max_length=97, db_index=True, verbose_name='Заголовок')
     content = models.TextField(blank=True, verbose_name='Контент')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
