@@ -42,7 +42,9 @@ def add_news(request):
         form = AddNewsForm(request.POST)
 
         if form.is_valid():
-            new_object_news = News.objects.create(**form.cleaned_data)
+            # Для старой формы
+            # new_object_news = News.objects.create(**form.cleaned_data)
+            new_object_news = form.save()
             return redirect(new_object_news)
     else:
         form = AddNewsForm()
