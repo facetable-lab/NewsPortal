@@ -1,6 +1,9 @@
-from django import forms
+import re
 
-from .models import News, Category
+from django import forms
+from django.core.exceptions import ValidationError
+
+from .models import News
 
 
 # Новая версия формы, связанная с моделью
@@ -13,6 +16,14 @@ class AddNewsForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 13}),
             'category': forms.Select(attrs={'class': 'form-control'})
         }
+
+    # Кастомная валидация
+    def clean_title(self):
+        title = self.cleaned_data['title']
+
+        if re.match(r'\d', title):
+            return ValidationError('Заголовок не должен начинатся с цифры')
+        return title
 
 # Старая версия формы, не связанная с моделью
 # class AddNewsForm(forms.Form):
