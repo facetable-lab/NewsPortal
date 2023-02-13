@@ -1,30 +1,38 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView
 
 from .models import News, Category
 from .forms import AddNewsForm
 
 
-def index(request):
-    news = News.objects.all()
+class HomeNews(ListView):
+    model = News
+    context_object_name = 'news'
+    template_name = 'news/index.html'
 
-    context = {
-        'title': 'Все новости',
-        'news': news
-    }
+    # extra_context = {'title': 'Все новости'}
 
-    return render(request, template_name='news/index.html', context=context)
+    def get_queryset(self):
+        return News.objects.filter(is_published=True)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Все новости'
+        return context
 
 
-def get_category(request, category_id):
-    news = News.objects.filter(category_id=category_id)
-    category = get_object_or_404(Category, pk=category_id)
+class NewsByCategory(ListView):
+    model = News
+    context_object_name = 'news'
+    template_name = 'news/category.html'
 
-    context = {
-        'news': news,
-        'current_category': category
-    }
+    def get_queryset(self):
+        return News.objects.filter(category_id=self.kwargs['category_id'], is_published=True)
 
-    return render(request, template_name='news/category.html', context=context)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_category'] = Category.objects.get(pk=self.kwargs['category_id'])
+        return context
 
 
 def view_news(request, news_id):
